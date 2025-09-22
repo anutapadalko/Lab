@@ -127,7 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileHandler.cpp" />
     <ClCompile Include="Lab.cpp" />
+    <ClCompile Include="MyStruct.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="RandomTransformer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AffineTransform.h" />
+    <ClInclude Include="FileHandler.h" />
+    <ClInclude Include="MyStruct.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="RandomTransformer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
