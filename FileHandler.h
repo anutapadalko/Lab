@@ -8,16 +8,13 @@
 #include <sstream>
 #include <stdexcept>
 
-
 struct InputData {
     size_t n;
     Point startPoint;
     std::vector<AffineTransform> transforms;
-
 };
 
-class FileHandler
-{
+class FileHandler {
 public:
     static InputData readInputFile(const std::string& filename);
 
@@ -28,4 +25,3 @@ public:
 private:
     FileHandler() = default;
 };
-

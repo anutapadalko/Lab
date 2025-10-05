@@ -6,8 +6,7 @@
 #include <random>
 #include <stdexcept>
 
-class RandomTransformer
-{
+class RandomTransformer {
 private:
     std::vector<AffineTransform> transforms_;
     mutable std::mt19937 generator_;
@@ -21,7 +20,7 @@ public:
     {
         if (transforms_.empty())
         {
-            throw std::invalid_argument("RandomTransformer: список перетворень не може бути порожнім");
+            throw std::invalid_argument("RandomTransformer: list of transforms can't be empty");
         }
         distribution_ = std::uniform_int_distribution<size_t>(0, transforms_.size() - 1);
     }
@@ -40,4 +39,3 @@ public:
 
     const AffineTransform& getTransform(size_t index) const;
 };
-

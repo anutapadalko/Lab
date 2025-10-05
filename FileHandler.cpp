@@ -5,24 +5,24 @@ InputData FileHandler::readInputFile(const std::string& filename)
     std::ifstream file(filename);
     if (!file.is_open())
     {
-        throw std::runtime_error("Не вдалося відкрити файл: " + filename);
+        throw std::runtime_error("Program couldn't open the file: " + filename);
     }
 
     InputData data;
 
     if (!(file >> data.n))
     {
-        throw std::runtime_error("Помилка читання кількості точок з файлу");
+        throw std::runtime_error("Error while reading number of points from the file");
     }
 
     if (data.n == 0)
     {
-        throw std::invalid_argument("Кількість точок повинна бути більше 0");
+        throw std::invalid_argument("Number of points has to be greater than 0");
     }
 
     if (!(file >> data.startPoint))
     {
-        throw std::runtime_error("Помилка читання початкової точки з файлу");
+        throw std::runtime_error("Error while reading start point from the file");
     }
 
     std::string line;
@@ -55,7 +55,7 @@ InputData FileHandler::readInputFile(const std::string& filename)
 
     if (data.transforms.empty())
     {
-        throw std::runtime_error("Не знайдено жодного афінного перетворення у файлі");
+        throw std::runtime_error("No affine transform was found in the file");
     }
 
     return data;
@@ -66,7 +66,7 @@ void FileHandler::writeOutputFile(const std::string& filename, const std::vector
     std::ofstream file(filename);
     if (!file.is_open())
     {
-        throw std::runtime_error("Не вдалося створити файл: " + filename);
+        throw std::runtime_error("Couldn't create file: " + filename);
     }
 
     for (const auto& point : points)

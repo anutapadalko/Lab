@@ -25,7 +25,7 @@ Point RandomTransformer::operator()(const Point& point) const
 {
     if (transforms_.empty())
     {
-        throw std::runtime_error("RandomTransformer: немає доступних перетворень");
+        throw std::runtime_error("RandomTransformer: there are no available transforms");
     }
 
     size_t index = distribution_(generator_);
@@ -42,7 +42,7 @@ const AffineTransform& RandomTransformer::getTransform(size_t index) const
 {
     if (index >= transforms_.size())
     {
-        throw std::out_of_range("RandomTransformer: індекс поза межами");
+        throw std::out_of_range("RandomTransformer: index out of range");
     }
     return transforms_[index];
 }

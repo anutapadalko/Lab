@@ -1,4 +1,4 @@
-﻿#include <iostream>
+﻿#pragma once
 // Compiler: MVC with C++20 support
 
 #include "Point.h"
@@ -32,12 +32,12 @@ std::vector<Point> generatePointSequence(const InputData& data)
 
 void printUsage(const std::string& programName)
 {
-    std::cout << "Використання: " << programName << " <вхідний_файл> <вихідний_файл>\n";
-    std::cout << "\nФормат вхідного файлу:\n";
-    std::cout << "Рядок 1: n (кількість точок для генерації)\n";
-    std::cout << "Рядок 2: x y (координати початкової точки)\n";
-    std::cout << "Рядки 3+: a b c d tx ty (параметри афінного перетворення)\n";
-    std::cout << "\nПриклад:\n";
+    std::cout << "Using: " << programName << " <input_file> <output_file>\n";
+    std::cout << "\nFormat of the input file:\n";
+    std::cout << "Line 1: n (number of points for generation)\n";
+    std::cout << "Line 2: x y (coordinates of start point)\n";
+    std::cout << "Lines 3+: a b c d tx ty (parameters of the affine transformation)\n";
+    std::cout << "\nExample:\n";
     std::cout << "100000\n";
     std::cout << "0 0\n";
     std::cout << "0.5 0 0 0.5 0 0\n";
@@ -48,12 +48,12 @@ void printUsage(const std::string& programName)
 void printStatistics(const InputData& data, const std::vector<Point>& points,
     std::chrono::milliseconds executionTime)
 {
-    std::cout << "\n=== Статистика виконання ===\n";
-    std::cout << "Кількість згенерованих точок: " << points.size() << "\n";
-    std::cout << "Кількість афінних перетворень: " << data.transforms.size() << "\n";
-    std::cout << "Початкова точка: " << data.startPoint << "\n";
-    std::cout << "Кінцева точка: " << points.back() << "\n";
-    std::cout << "Час виконання: " << executionTime.count() << " мс\n";
+    std::cout << "\n=== Statistics of executing ===\n";
+    std::cout << "Number of generated points: " << points.size() << "\n";
+    std::cout << "Number of affine transform: " << data.transforms.size() << "\n";
+    std::cout << "Start point: " << data.startPoint << "\n";
+    std::cout << "End point: " << points.back() << "\n";
+    std::cout << "Time of execution: " << executionTime.count() << " мс\n";
 }
 
 int main(int argc, char* argv[])
@@ -69,27 +69,27 @@ int main(int argc, char* argv[])
         std::string inputFilename = argv[1];
         std::string outputFilename = argv[2];
 
-        std::cout << "=== Програма генерації послідовності точок афінними перетвореннями ===\n";
-        std::cout << "Вхідний файл: " << inputFilename << "\n";
-        std::cout << "Вихідний файл: " << outputFilename << "\n\n";
+        std::cout << "=== Program that generates list of points with the affine transform ===\n";
+        std::cout << "Input file: " << inputFilename << "\n";
+        std::cout << "Output file: " << outputFilename << "\n\n";
 
         if (!FileHandler::fileExists(inputFilename)) {
-            throw std::runtime_error("Вхідний файл не існує: " + inputFilename);
+            throw std::runtime_error("Input file does not exist: " + inputFilename);
         }
 
         auto startTime = std::chrono::high_resolution_clock::now();
 
-        std::cout << "Читання вхідних даних...\n";
+        std::cout << "Reading of input data...\n";
         InputData data = FileHandler::readInputFile(inputFilename);
 
-        std::cout << "Кількість точок для генерації: " << data.n << "\n";
-        std::cout << "Початкова точка: " << data.startPoint << "\n";
-        std::cout << "Кількість афінних перетворень: " << data.transforms.size() << "\n";
+        std::cout << "Number of points for generation: " << data.n << "\n";
+        std::cout << "Start point: " << data.startPoint << "\n";
+        std::cout << "Number of affine transformations: " << data.transforms.size() << "\n";
 
-        std::cout << "Генерація послідовності точок...\n";
+        std::cout << "Generating list of points...\n";
         std::vector<Point> points = generatePointSequence(data);
 
-        std::cout << "Запис результату у файл...\n";
+        std::cout << "Writing result to the file...\n";
         FileHandler::writeOutputFile(outputFilename, points);
 
         auto endTime = std::chrono::high_resolution_clock::now();
@@ -97,16 +97,16 @@ int main(int argc, char* argv[])
 
         printStatistics(data, points, executionTime);
 
-        std::cout << "\nПрограма успішно завершена!\n";
+        std::cout << "\nProgram has successfully ended!\n";
         return 0;
 
     }
     catch (const std::exception& e) {
-        std::cerr << "Помилка: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
     catch (...) {
-        std::cerr << "Невідома помилка!" << std::endl;
+        std::cerr << "Unknown error!" << std::endl;
         return 1;
     }
 
